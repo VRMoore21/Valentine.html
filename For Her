@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine?</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #d6336c;
+      text-align: center;
+    }
+
+    .buttons {
+      position: relative;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 14px 28px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+      z-index: 2;
+    }
+
+    #no {
+      background-color: #bbb;
+      position: absolute;
+      left: 120px;
+      top: 0;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 2s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-150px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Jennifer 💖<br>Will you be my Valentine?</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes 💘</button>
+    <button id="no">No 🙃</button>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+
+    let speedMultiplier = 1;
+
+    noButton.addEventListener("mouseover", () => {
+      speedMultiplier += 0.3;
+
+      const maxX = window.innerWidth - noButton.offsetWidth;
+      const maxY = window.innerHeight - noButton.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noButton.style.transition = `all ${0.15 / speedMultiplier}s linear`;
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    });
+
+    yesButton.addEventListener("click", () => {
+      document.body.innerHTML = "<h1>YAY!! 💘🥰<br>Happy Valentine’s Day, Jennifer!</h1>";
+      createHearts();
+    });
+
+    function createHearts() {
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.animationDuration = 1.5 + Math.random() + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+  </script>
+
+</body>
+</html>
